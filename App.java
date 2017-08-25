@@ -71,7 +71,7 @@ public class App {
 
     static void pause() {
         Scanner pause = new Scanner(System.in);
-        System.out.println("Press enter to continue ");
+        System.out.println("\nPress enter to continue ");
         pause.nextLine();
     }
 }
