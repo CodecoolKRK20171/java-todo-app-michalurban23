@@ -23,13 +23,14 @@ public class App {
 
     public static void runMenu(TodoList list) {
         clear();
-        printMenu();
         while (appRunning) {
+            printMenu();
             handleMenu(list);
         }
     }
 
     private static void printMenu() {
+        clear();
         System.out.println("What do you want to do?\n");
         System.out.println("1) List all tasks");
         System.out.println("2) Add new task");
@@ -40,8 +41,10 @@ public class App {
     }
 
     private static void handleMenu(TodoList list) {
+        System.out.println("Choose an option: ");
         String option = input.nextLine();
 
+        clear();
         if (option.equals("1")) {
             list.listItems();
         } else if (option.equals("2")) {
@@ -56,12 +59,19 @@ public class App {
             clear();
             System.exit(0);
         } else {
-            System.out.println("Invalid option");
+            System.out.println("Invalid option!\n");
         }
+        pause();
     }
 
     static void clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    static void pause() {
+        Scanner pause = new Scanner(System.in);
+        System.out.println("Press enter to continue ");
+        pause.nextLine();
     }
 }
