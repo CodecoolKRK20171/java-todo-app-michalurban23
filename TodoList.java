@@ -2,8 +2,7 @@
  * Class representing a todo list.
  * TodoList object should aggregate TodoItem objects.
  */
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class TodoList{
 
@@ -44,8 +43,12 @@ public class TodoList{
         System.out.println("Which item do you want to mark?");
         Scanner read = new Scanner(System.in);
 
-        Integer index = read.nextInt();
-        listOfTasks.get(index-1).setCompletedTrue();
+        try {
+            Integer index = read.nextInt();
+            listOfTasks.get(index-1).setCompletedTrue();
+        } catch (IndexOutOfBoundsException | InputMismatchException e) {
+            System.out.println("Invalid index");
+        }
     }
 
     public void unmarkItem() {
@@ -53,17 +56,23 @@ public class TodoList{
         System.out.println("Which item do you want to unmark?");
         Scanner read = new Scanner(System.in);
 
-        Integer index = read.nextInt();
-        listOfTasks.get(index-1).setCompletedFalse();
+        try {
+            Integer index = read.nextInt();
+            listOfTasks.get(index-1).setCompletedFalse();
+        } catch (IndexOutOfBoundsException | InputMismatchException e) {
+            System.out.println("Invalid index");
+        }
     }
 
     public void archiveItems() {
 
-        for (TodoItem item : listOfTasks) {
+        for (Iterator<TodoItem> iterator = listOfTasks.iterator(); iterator.hasNext();) {
+            TodoItem item = iterator.next();
             if (item.getCompleted()) {
-                listOfTasks.remove(item);
+                iterator.remove();
             }
         }
+        System.out.println("Tasks successfully archived");
     }
 
 }
